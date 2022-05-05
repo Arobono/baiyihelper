@@ -29,11 +29,18 @@ func Subtract(a, b float64) float64 {
 }
 
 //乘
-func Multiply(a, b float64) float64 {
-	da := decimal.NewFromFloat(a)
-	db := decimal.NewFromFloat(b)
-	res, _ := da.Mul(db).Float64()
+func Multiply(a ...float64) float64 {
+	var dec = decimal.NewFromFloat(1)
+	for _, i := range a {
+		dec = dec.Mul(decimal.NewFromFloat(i))
+	}
+	res, _ := dec.Float64()
 	return res
+
+	// da := decimal.NewFromFloat(a)
+	// db := decimal.NewFromFloat(b)
+	// res, _ := da.Mul(db).Float64()
+	// return res
 }
 
 //位数限制

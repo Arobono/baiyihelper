@@ -37,7 +37,8 @@ type DbWorker struct {
 	Db  *sql.DB
 }
 
-func InitDb(link string) (dbw DbWorker) {
+//打开数据库
+func OpenDb(link string) (dbw DbWorker) {
 
 	dbw = DbWorker{Dsn: link}
 	dbtemp, err := sql.Open("mysql", dbw.Dsn)
@@ -48,9 +49,14 @@ func InitDb(link string) (dbw DbWorker) {
 	return
 }
 
+//关闭数据库
+func (dbw DbWorker) CloseDb() {
+	defer dbw.Db.Close()
+	return
+}
+
 //获取数字货币K线
 func (dbw DbWorker) GetKLine(Symbol, interval, beginTime, endTime string) (baseKLineList []BaseKLine, err error) {
-	defer dbw.Db.Close()
 	var sqlBuffer bytes.Buffer
 	sqlBuffer.WriteString(" WHERE Cinterval = '")
 	sqlBuffer.WriteString(interval)
