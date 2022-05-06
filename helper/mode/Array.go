@@ -304,7 +304,7 @@ func (a *Array) AvgFloat64(cfunc func(interface{}) float64) float64 {
 	return avg
 }
 
-func (a *Array) Take(num int) (res *Array) {
+func (a *Array) Take(num int) *Array {
 	if a.size < num {
 		num = a.size
 	}
@@ -312,12 +312,13 @@ func (a *Array) Take(num int) (res *Array) {
 	for i := 0; i < num; i++ {
 		newArr[i] = a.data[i]
 	}
-	res.data = newArr
-	res.size = num
-	return
+	arr := &Array{}
+	arr.data = newArr
+	arr.size = num
+	return arr
 }
 
-func (a *Array) Skip(num int) (res *Array) {
+func (a *Array) Skip(num int) *Array {
 
 	var size = 0
 	if num < a.Count() {
@@ -332,7 +333,8 @@ func (a *Array) Skip(num int) (res *Array) {
 		}
 
 	}
-	res.data = newArr
-	res.size = size
-	return
+	arr := &Array{}
+	arr.data = newArr
+	arr.size = size
+	return arr
 }
