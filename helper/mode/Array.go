@@ -160,7 +160,7 @@ func (a *Array) AddIndex(index int, element interface{}) {
 		a.resize(2 * a.size)
 	}
 	// 将插入的索引位置之后的元素后移，腾出插入位置
-	for i := a.size - 1; i > index; i-- {
+	for i := a.size - 1; i >= index; i-- {
 		a.data[i+1] = a.data[i]
 	}
 	a.data[index] = element
