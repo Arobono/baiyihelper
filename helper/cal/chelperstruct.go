@@ -2,6 +2,7 @@ package cal
 
 import (
 	"reflect"
+	"strings"
 
 	"github.com/gogf/gf/v2/util/gconv"
 )
@@ -60,6 +61,7 @@ func GetTagValue(info interface{}, tagname string) (dataArr []string) {
 	for i := 0; i < t.NumField(); i++ {
 		if tagValue := t.Field(i).Tag.Get(tagname); tagValue != "" {
 			valueName := gconv.String(v.Field(i).Interface())
+			valueName = strings.Replace(valueName, ",", "，", -1)
 			dataArr = append(dataArr, valueName)
 		}
 	}
