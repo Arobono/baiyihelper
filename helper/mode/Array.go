@@ -155,9 +155,12 @@ func (a *Array) AddIndex(index int, element interface{}) {
 	if index < 0 || index > a.Len() {
 		panic("Add failed, require index >= 0 and index <= capacity")
 	}
-	// 数组已满则扩容
 	if a.size == len(a.data) {
-		a.resize(2 * a.size)
+		if a.size == 0 {
+			a.resize(1)
+		} else {
+			a.resize(2 * a.size)
+		}
 	}
 	// 将插入的索引位置之后的元素后移，腾出插入位置
 	for i := a.size - 1; i >= index; i-- {
