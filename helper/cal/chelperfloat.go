@@ -1,6 +1,10 @@
 package cal
 
-import "github.com/shopspring/decimal"
+import (
+	"strconv"
+
+	"github.com/shopspring/decimal"
+)
 
 //加
 func Add(a ...float64) float64 {
@@ -44,10 +48,9 @@ func Multiply(a ...float64) float64 {
 }
 
 //位数限制
-func Digits(a float64, mod int) float64 {
-	decimal.DivisionPrecision = mod
-	res, _ := decimal.NewFromFloat(a).Float64()
-	return res
+func Digits(value float64, mod int) float64 {
+	value, _ = strconv.ParseFloat(strconv.FormatFloat(value, 'f', mod, 64), 64)
+	return value
 }
 
 //float64  a是否在b、c之间
