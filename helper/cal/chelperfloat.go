@@ -44,11 +44,8 @@ func Multiply(a ...float64) float64 {
 }
 
 //位数限制
-func Digits(a float64, mod *int) float64 {
-	if mod == nil {
-		return a
-	}
-	decimal.DivisionPrecision = *mod
+func Digits(a float64, mod int) float64 {
+	decimal.DivisionPrecision = mod
 	res, _ := decimal.NewFromFloat(a).Float64()
 	return res
 }
