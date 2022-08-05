@@ -295,7 +295,7 @@ func (a *Array) SumFloat64(cfunc func(interface{}) float64) float64 {
 	var sum float64 = 0
 	for _, item := range a.data {
 		if item != nil {
-			sum += cfunc(item)
+			sum = cal.Add(sum, cfunc(item))
 		}
 	}
 	return sum
